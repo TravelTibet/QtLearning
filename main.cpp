@@ -164,28 +164,28 @@
 //	return a.exec();
 //}
 
-#include<QtWidgets>
-#include <iostream>
-using namespace std;
-int main(int argc, char* argv[]) 
-{
-	QApplication a(argc, argv);
-	//创建部件
-	QWidget w;
-	QToolButton* pb1 = new QToolButton(&w); 
-	QToolButton* pb2 = new QToolButton(&w);
-
-	pb1->setText("AAA"); //设置显示的文本
-	//pb1->setIcon(QIcon("F:\\1.png")); //为工具按钮设置图标，图标来自于 F 盘的 1.png 文件。
-	//pb1->setIconSize(QSize(44, 44));//图标大小需使用 QAbstractButton::setIconSize 函数设置。
-	pb1->setToolButtonStyle(Qt::ToolButtonTextBesideIcon); //工具按钮将文字显示于图标旁边。
-	pb1->setAutoRaise(true); //为该工具按钮设置自动提升属性
-	pb2->setArrowType(Qt::DownArrow); //此处设置的箭头会替换掉以下设置的图标
-	//pb2->setIcon(QIcon("F:\\1.png"));
-	//pb2->setIconSize(QSize(44, 44));
-
-	pb1->move(22, 22); pb2->move(111, 22); // pb3->move(177,22);
-	w.resize(300, 200);
-	w.show();
-	return a.exec();
-}
+//#include<QtWidgets>
+//#include <iostream>
+//using namespace std;
+//int main(int argc, char* argv[]) 
+//{
+//	QApplication a(argc, argv);
+//	//创建部件
+//	QWidget w;
+//	QToolButton* pb1 = new QToolButton(&w); 
+//	QToolButton* pb2 = new QToolButton(&w);
+//
+//	pb1->setText("AAA"); //设置显示的文本
+//	//pb1->setIcon(QIcon("F:\\1.png")); //为工具按钮设置图标，图标来自于 F 盘的 1.png 文件。
+//	//pb1->setIconSize(QSize(44, 44));//图标大小需使用 QAbstractButton::setIconSize 函数设置。
+//	pb1->setToolButtonStyle(Qt::ToolButtonTextBesideIcon); //工具按钮将文字显示于图标旁边。
+//	pb1->setAutoRaise(true); //为该工具按钮设置自动提升属性
+//	pb2->setArrowType(Qt::DownArrow); //此处设置的箭头会替换掉以下设置的图标
+//	//pb2->setIcon(QIcon("F:\\1.png"));
+//	//pb2->setIconSize(QSize(44, 44));
+//
+//	pb1->move(22, 22); pb2->move(111, 22); // pb3->move(177,22);
+//	w.resize(300, 200);
+//	w.show();
+//	return a.exec();
+//}

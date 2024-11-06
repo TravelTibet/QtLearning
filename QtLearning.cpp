@@ -118,3 +118,44 @@
 //	pb1->move(22, 22); pb2->move(111, 22); // pb3->move(177,22);
 //	w.resize(300, 200); w.show(); return a.exec();
 //}
+
+
+#include "QtLearning.h"
+int main(int argc, char* argv[]) {
+	QApplication a(argc, argv);
+	//QWidget w;
+	B w;
+	//QDialogButtonBox 继承自 QWidget，因此其本身可以是一个窗口。
+	//向按钮框中添加 Qt 内置的 Ok 和 Cancel 按钮
+	QDialogButtonBox* d = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+	//创建一些自定义按钮，不需要指定父部件
+	QPushButton* pb1 = new QPushButton("Reset1");
+	QPushButton* pb2 = new QPushButton("Yes2");
+	QPushButton* pb3 = new QPushButton("Accept3");
+	QPushButton* pb4 = new QPushButton("Discard4");
+	QPushButton* pb5 = new QPushButton("No5");
+	QPushButton* pb6 = new QPushButton("Action6");
+	QPushButton* pb7 = new QPushButton("Reject7");
+	QPushButton* pb8 = new QPushButton("Apply8");
+	//向按钮框中添加按钮，按钮并不会按以下顺序添加，而是有固定的顺序的。
+	d->addButton(pb3, QDialogButtonBox::AcceptRole);
+	d->addButton(pb1, QDialogButtonBox::ResetRole);
+	d->addButton(pb2, QDialogButtonBox::YesRole);
+	d->addButton(pb4, QDialogButtonBox::DestructiveRole);
+	d->addButton(pb6, QDialogButtonBox::ActionRole);
+	d->addButton(pb7, QDialogButtonBox::RejectRole);
+	d->addButton(pb5, QDialogButtonBox::NoRole);
+	d->addButton(pb8, QDialogButtonBox::ApplyRole);
+	// 以下为 addButton 函数的另两个重载版本
+	d->addButton("Help9", QDialogButtonBox::HelpRole);
+	//d->addButton(QDialogButtonBox::Reset); //只能添加一个标准按钮，不能使用或运算符添加多个。
+   //也可使用以下函数添加 Qt 内置的标准按钮，但以下函数会清除掉使用构造函数时指定的标准按钮。
+	//d->setStandardButtons(QDialogButtonBox::Reset|QDialogButtonBox::YesToAll);
+   //为按钮框关联信号和槽
+	QObject::connect(d, &QDialogButtonBox::rejected, &w, &B::f);
+	QObject::connect(d, &QDialogButtonBox::accepted, &w, &B::g);
+	QObject::connect(d, &QDialogButtonBox::helpRequested, &w, &B::h);
+	//按钮框中的所有按钮都会发送 clicked 信号
+	 // QObject::connect(d, SIGNAL(clicked(QAbstractButton*)), &w, SLOT(j(QAbstractButton*)));
+	d->resize(300, 200); d->show(); return a.exec();
+}

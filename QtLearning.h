@@ -63,3 +63,19 @@
 //	void f() { cout << "F" << endl; }
 //	void g() { cout << "G" << endl; }
 //};
+
+#pragma once
+#include<QtWidgets>
+#include <iostream>
+using namespace std;
+class B :public QObject {
+	Q_OBJECT
+public slots: //注：qt5.0 之后，可使用普通函数作为槽函数。
+	void f() {
+		cout << "No" << endl;
+		exit(1);
+	} //结束程序
+	void g() { cout << "Yes" << endl; }
+	void h() { cout << "Help" << endl; }
+	void j(QAbstractButton* b) { cout << "clicked" << endl; }
+};
