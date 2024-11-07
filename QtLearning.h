@@ -64,18 +64,68 @@
 //	void g() { cout << "G" << endl; }
 //};
 
-#pragma once
-#include<QtWidgets>
-#include <iostream>
-using namespace std;
-class B :public QObject {
-	Q_OBJECT
-public slots: //注：qt5.0 之后，可使用普通函数作为槽函数。
-	void f() {
-		cout << "No" << endl;
-		exit(1);
-	} //结束程序
-	void g() { cout << "Yes" << endl; }
-	void h() { cout << "Help" << endl; }
-	void j(QAbstractButton* b) { cout << "clicked" << endl; }
-};
+
+//#include<QtWidgets>
+//#include <iostream>
+//using namespace std;
+//class B :public QObject {
+//	Q_OBJECT
+//public slots: 
+//	void f() {
+//		cout << "No" << endl;
+//		exit(1);
+//	} //结束程序
+//	void g() { cout << "Yes" << endl; }
+//	void h() { cout << "Help" << endl; }
+//	void j(QAbstractButton* b) { cout << "clicked" << endl; }
+//};
+
+////	按钮组
+//#pragma once
+//#include<QtWidgets>
+//#include <iostream>
+//using namespace std;
+//class B :public QButtonGroup {
+//	Q_OBJECT
+//public slots:
+//	void f(QAbstractButton* b) {
+//		int i = id(b); //获取按钮 b 的 id
+//		QAbstractButton* c = checkedButton(); //获取当前被选中的按钮
+//		cout << "id=" << i << endl;
+//		cout << "button=" << c->objectName().toStdString() << endl;
+//	}
+//};
+
+// QLabel
+
+//#pragma once
+//#include <QtWidgets>
+//#include <iostream>
+//using namespace std;
+//class B :public QLabel
+//{
+//	Q_OBJECT
+//public:
+//	B(QString s, QWidget* p) :QLabel(s, p) {}
+//public slots:
+//	void f(const QString& k)
+//	{
+//		cout << "link = " << k.toStdString() << endl;
+//		cout << selectedText().toStdString() << endl;
+//	}
+//};
+
+//#include <QtWidgets>
+//#include <iostream>
+////using namespace std;
+////class B :public QLabel
+////{
+////	Q_OBJECT
+////public:
+////	B(QString s, QWidget* p) :QLabel(s, p) {}
+////public slots:
+////	void f()
+////	{
+////		setScaledContents(hasScaledContents() ^ true);
+//	//}
+////};

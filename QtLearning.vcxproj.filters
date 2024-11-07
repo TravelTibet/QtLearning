@@ -39,8 +39,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="QtLearning.h">
+    <ClInclude Include="QtLearning.h">
       <Filter>Header Files</Filter>
-    </QtMoc>
+    </ClInclude>
   </ItemGroup>
 </Project>

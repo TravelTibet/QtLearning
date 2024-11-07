@@ -120,42 +120,128 @@
 //}
 
 
-#include "QtLearning.h"
-int main(int argc, char* argv[]) {
-	QApplication a(argc, argv);
-	//QWidget w;
-	B w;
-	//QDialogButtonBox 继承自 QWidget，因此其本身可以是一个窗口。
-	//向按钮框中添加 Qt 内置的 Ok 和 Cancel 按钮
-	QDialogButtonBox* d = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-	//创建一些自定义按钮，不需要指定父部件
-	QPushButton* pb1 = new QPushButton("Reset1");
-	QPushButton* pb2 = new QPushButton("Yes2");
-	QPushButton* pb3 = new QPushButton("Accept3");
-	QPushButton* pb4 = new QPushButton("Discard4");
-	QPushButton* pb5 = new QPushButton("No5");
-	QPushButton* pb6 = new QPushButton("Action6");
-	QPushButton* pb7 = new QPushButton("Reject7");
-	QPushButton* pb8 = new QPushButton("Apply8");
-	//向按钮框中添加按钮，按钮并不会按以下顺序添加，而是有固定的顺序的。
-	d->addButton(pb3, QDialogButtonBox::AcceptRole);
-	d->addButton(pb1, QDialogButtonBox::ResetRole);
-	d->addButton(pb2, QDialogButtonBox::YesRole);
-	d->addButton(pb4, QDialogButtonBox::DestructiveRole);
-	d->addButton(pb6, QDialogButtonBox::ActionRole);
-	d->addButton(pb7, QDialogButtonBox::RejectRole);
-	d->addButton(pb5, QDialogButtonBox::NoRole);
-	d->addButton(pb8, QDialogButtonBox::ApplyRole);
-	// 以下为 addButton 函数的另两个重载版本
-	d->addButton("Help9", QDialogButtonBox::HelpRole);
-	//d->addButton(QDialogButtonBox::Reset); //只能添加一个标准按钮，不能使用或运算符添加多个。
-   //也可使用以下函数添加 Qt 内置的标准按钮，但以下函数会清除掉使用构造函数时指定的标准按钮。
-	//d->setStandardButtons(QDialogButtonBox::Reset|QDialogButtonBox::YesToAll);
-   //为按钮框关联信号和槽
-	QObject::connect(d, &QDialogButtonBox::rejected, &w, &B::f);
-	QObject::connect(d, &QDialogButtonBox::accepted, &w, &B::g);
-	QObject::connect(d, &QDialogButtonBox::helpRequested, &w, &B::h);
-	//按钮框中的所有按钮都会发送 clicked 信号
-	 // QObject::connect(d, SIGNAL(clicked(QAbstractButton*)), &w, SLOT(j(QAbstractButton*)));
-	d->resize(300, 200); d->show(); return a.exec();
-}
+//#include "QtLearning.h"
+//int main(int argc, char* argv[]) {
+//	QApplication a(argc, argv);
+//	//QWidget w;
+//	B w;
+//	//QDialogButtonBox 继承自 QWidget，因此其本身可以是一个窗口。
+//	//向按钮框中添加 Qt 内置的 Ok 和 Cancel 按钮
+//	QDialogButtonBox* d = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+//	//创建一些自定义按钮，不需要指定父部件
+//	QPushButton* pb1 = new QPushButton("Reset1");
+//	QPushButton* pb2 = new QPushButton("Yes2");
+//	QPushButton* pb3 = new QPushButton("Accept3");
+//	QPushButton* pb4 = new QPushButton("Discard4");
+//	QPushButton* pb5 = new QPushButton("No5");
+//	QPushButton* pb6 = new QPushButton("Action6");
+//	QPushButton* pb7 = new QPushButton("Reject7");
+//	QPushButton* pb8 = new QPushButton("Apply8");
+//	//向按钮框中添加按钮，按钮并不会按以下顺序添加，而是有固定的顺序的。
+//	d->addButton(pb3, QDialogButtonBox::AcceptRole);
+//	d->addButton(pb1, QDialogButtonBox::ResetRole);
+//	d->addButton(pb2, QDialogButtonBox::YesRole);
+//	d->addButton(pb4, QDialogButtonBox::DestructiveRole);
+//	d->addButton(pb6, QDialogButtonBox::ActionRole);
+//	d->addButton(pb7, QDialogButtonBox::RejectRole);
+//	d->addButton(pb5, QDialogButtonBox::NoRole);
+//	d->addButton(pb8, QDialogButtonBox::ApplyRole);
+//	// 以下为 addButton 函数的另两个重载版本
+//	d->addButton("Help9", QDialogButtonBox::HelpRole);
+//	//d->addButton(QDialogButtonBox::Reset); //只能添加一个标准按钮，不能使用或运算符添加多个。
+//   //也可使用以下函数添加 Qt 内置的标准按钮，但以下函数会清除掉使用构造函数时指定的标准按钮。
+//	//d->setStandardButtons(QDialogButtonBox::Reset|QDialogButtonBox::YesToAll);
+//   //为按钮框关联信号和槽
+//	QObject::connect(d, &QDialogButtonBox::rejected, &w, &B::f);
+//	QObject::connect(d, &QDialogButtonBox::accepted, &w, &B::g);
+//	QObject::connect(d, &QDialogButtonBox::helpRequested, &w, &B::h);
+//	//按钮框中的所有按钮都会发送 clicked 信号
+//	  //QObject::connect(d, SIGNAL(clicked(QAbstractButton*)), &w, SLOT(j(QAbstractButton*)));
+//	d->resize(300, 200); d->show(); return a.exec();
+//}
+
+
+////	按钮组
+//#include "QtLearning.h"
+//int main(int argc, char* argv[]) {
+//	QApplication a(argc, argv);
+//	QWidget w; B* b = new B; //创建按钮组
+//	QRadioButton* rb1 = new QRadioButton("AAA", &w);
+//	QRadioButton* rb2 = new QRadioButton("BBB", &w);
+//	QCheckBox* cb1 = new QCheckBox("CCC", &w); QCheckBox* cb2 = new QCheckBox("DDD", &w);
+//	QCheckBox* cb3 = new QCheckBox("EEE", &w);
+//	//设置对象名。
+//	rb1->setObjectName("AAA"); rb2->setObjectName("BBB");
+//	cb1->setObjectName("CCC"); cb2->setObjectName("DDD"); cb3->setObjectName("EEE");
+//	//把按钮添加到按钮组 b 之中
+//	b->addButton(rb1); //未指定 id，默认为-2
+//	b->addButton(rb2); //未指定 id，默认为-3
+//	b->addButton(cb1, 2); //指定 id 为 2
+//	b->addButton(cb2); //未指定 id，此时默认为-4
+//	
+//	//b->addButton(cb3);		// 这里默认为 -5 继续延续上面的序号!!
+//
+//	b->setId(cb2, 3); //把 cb2 的 id 设置为 3。
+//	//布局按钮
+//	rb1->move(22, 22); rb2->move(22, 50); cb1->move(22, 77);
+//	cb2->move(22, 105); cb3->move(99, 22);
+//	//关联信号和槽
+//	QObject::connect(b, SIGNAL(buttonClicked(QAbstractButton*)), b, SLOT(f(QAbstractButton*)));
+//	w.resize(300, 200); w.show(); return a.exec();
+//}
+
+// QLabel
+
+//#include "QtLearning.h"
+//int main(int argc, char* argv[])
+//{
+//	QApplication a(argc, argv);
+//	QWidget w;
+//	B* pb = new B("<a href=http://aaa>bbb</a>", &w);
+//	pb->move(22, 22);	pb->resize(222, 33);
+//	pb->setFrameStyle(QFrame::Box | QFrame::Raised);	pb->setLineWidth(5);
+//	pb->setOpenExternalLinks(true);
+//	pb->setTextInteractionFlags(Qt::LinksAccessibleByMouse);
+//	QObject::connect(pb, &QLabel::linkActivated, pb, &B::f); //标签 pb 不会发送该信号。
+//	B* pb1 = new B("	", &w);
+//	pb1->setFrameStyle(QFrame::Box | QFrame::Raised); pb1->setLineWidth(5);
+//
+//	pb1->resize(222, 33); pb1->move(22, 63);
+//	pb1->setOpenExternalLinks(false); /*这是默认值，此步可省略。此处表明标签会发送 linkActivated
+//   信号，但不能打开链接。*/
+//   //以下设置表示 pb1 的标签文本可编辑，可使用鼠标和键盘进行交互，也可使用鼠标和键盘激活链接。
+//	pb1->setTextInteractionFlags(Qt::LinksAccessibleByMouse | Qt::LinksAccessibleByKeyboard |
+//		Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard |
+//		Qt::TextEditable);
+//	QObject::connect(pb1, &QLabel::linkActivated, pb1, &B::f); //标签 pb1 会发送此信号
+//	B* pb2 = new B("<a href=http://aaa>ddd</a>", &w);
+//	pb2->setFrameStyle(QFrame::Box | QFrame::Raised); pb2->setLineWidth(5);
+//	pb2->resize(222, 33); pb2->move(22, 133);
+//	/*以下设置表示，pb2 的标签文本只可使用鼠标和键盘交互，不能使用鼠标或键盘激活链接，因此点击
+//   pb2 不会打开链接，也不会发送 linkActivated 信号*/
+//	pb2->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::TextSelectableByKeyboard);
+//	QObject::connect(pb2, &QLabel::linkActivated, pb2, &B::f); //标签 pb2 不会发送该信号
+//	w.resize(300, 200); w.show(); return a.exec();
+//}
+
+//#include "QtLearning.h"
+//int main(int argc, char* argv[]) {
+//	QApplication a(argc, argv);
+//	QWidget w; QPushButton* b = new QPushButton("AAAA", &w);
+//	B* pb = new B("<a href=http://aaa>bbb</a>", &w);
+//	pb->move(22, 22); pb->resize(222, 88);
+//	//设置标签边框样式，以使其看起来比较明显
+//	pb->setFrameStyle(QFrame::Box | QFrame::Raised); pb->setLineWidth(5);
+//	//把 f 盘下的 1.png 设置为标签的图片，此设置会清除标签之前的内容。
+//	pb->setPixmap(QPixmap("E:\\Tom.png"));
+//	QObject::connect(b, &QPushButton::clicked, pb, &B::f); //关联信号与槽函数
+//	//以下内容验证数字的显示与伙伴的设置
+//	QLabel* pb1 = new QLabel("ab&cde", &w); //该标签无伙伴，"&"字符会被显示在标签文本中
+//	pb1->move(22, 128);
+//	QLabel* pb2 = new QLabel("ab&cde", &w); pb2->move(66, 128);
+//	pb2->setNum(33.333); //将数字 33.333 以字符串的形式显示为标签的文本，并清除之前的内容。
+//	QLabel* pb3 = new QLabel("ab&cde", &w); pb3->move(22, 155);
+//	QLineEdit* pe = new QLineEdit(&w); pe->move(55, 155);
+//	pb3->setBuddy(pe); //设置伙伴后，标签的"&"字符将不会被显示。
+//	w.resize(300, 200); w.show(); return a.exec();
+//}

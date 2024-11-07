@@ -94,7 +94,7 @@
   <ItemGroup>
     <QtRcc Include="QtLearning.qrc" />
     <QtUic Include="QtLearning.ui" />
-    <QtMoc Include="QtLearning.h" />
+    <ClInclude Include="QtLearning.h" />
     <ClCompile Include="QtLearning.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
