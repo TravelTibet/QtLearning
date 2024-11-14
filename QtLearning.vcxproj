@@ -94,9 +94,13 @@
   <ItemGroup>
     <QtRcc Include="QtLearning.qrc" />
     <QtUic Include="QtLearning.ui" />
-    <ClInclude Include="QtLearning.h" />
+    <QtMoc Include="QtLearning.h" />
+    <ClCompile Include="A.cpp" />
     <ClCompile Include="QtLearning.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="A.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

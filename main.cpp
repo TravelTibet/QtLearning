@@ -278,29 +278,203 @@
 
 // Led 数字显示
 
-#include<QtWidgets>
-#include <iostream>
-using namespace std;
-int main(int argc, char* argv[]) {
-	QApplication a(argc, argv);
-	QWidget w;
-	QLCDNumber* pn = new QLCDNumber(&w);
-	pn->move(22, 22); pn->resize(222, 44);
-	pn->setDigitCount(7); /*设置显示的位数，该函数应位于 display 函数之前，否则该函数的设置会
-   不起作用。*/
-	pn->display(1245555345.2275687); //太大的浮点数会以科学计数的形式显示
-	QLCDNumber* pn1 = new QLCDNumber(&w);
-	pn1->move(22, 77); pn1->resize(222, 44);
-	pn1->setSegmentStyle(QLCDNumber::Flat);
-	pn1->setDigitCount(20);
-	pn1->display("1234");
-	cout << pn1->value() << endl; //输出 1234
-	QLCDNumber* pn2 = new QLCDNumber(&w);
-	pn2->move(22, 122); pn2->resize(222, 44);
-	pn2->display("0x1a3"); /*试图以 16 进制形式显示后面的数值 1a3，但不会成功，因为 0x1a3 会被当
-   作字符串显示，其中 x 无法显示，会被空格代替。*/
-	cout << pn2->value() << endl; //输出 0，因为 pn2 显示的"0 1A3"不是有效数字。
-	w.resize(300, 200);
-	w.show();
-	return a.exec();
+//#include<QtWidgets>
+//#include <iostream>
+//using namespace std;
+//int main(int argc, char* argv[]) {
+//	QApplication a(argc, argv);
+//	QWidget w;
+//	QLCDNumber* pn = new QLCDNumber(&w);
+//	pn->move(22, 22); pn->resize(222, 44);
+//	pn->setDigitCount(7); /*设置显示的位数，该函数应位于 display 函数之前，否则该函数的设置会
+//   不起作用。*/
+//	pn->display(1245555345.2275687); //太大的浮点数会以科学计数的形式显示
+//	QLCDNumber* pn1 = new QLCDNumber(&w);
+//	pn1->move(22, 77); pn1->resize(222, 44);
+//	pn1->setSegmentStyle(QLCDNumber::Flat);
+//	pn1->setDigitCount(20);
+//	pn1->display("1234");
+//	cout << pn1->value() << endl; //输出 1234
+//	QLCDNumber* pn2 = new QLCDNumber(&w);
+//	pn2->move(22, 122); pn2->resize(222, 44);
+//	pn2->display("0x1a3"); /*试图以 16 进制形式显示后面的数值 1a3，但不会成功，因为 0x1a3 会被当
+//   作字符串显示，其中 x 无法显示，会被空格代替。*/
+//	cout << pn2->value() << endl; //输出 0，因为 pn2 显示的"0 1A3"不是有效数字。
+//	w.resize(300, 200);
+//	w.show();
+//	return a.exec();
+//}
+
+//#include<QtWidgets>
+//#include <iostream>
+//using namespace std;
+//int main(int argc, char* argv[]) {
+//	QApplication a(argc, argv);
+//	QWidget w;
+//	QPushButton* pb = new QPushButton("Fixed");
+//	QPushButton* pb1 = new QPushButton("MaxSetMin");
+//	QPushButton* pb2 = new QPushButton("MaxNoMin");
+//	//每部件设置大小策略
+//	pb->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+//	pb1->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+//	pb2->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Fixed);
+//	QHBoxLayout* pg = new QHBoxLayout;
+//	pb->resize(222, 222); //使用布局后，resize 函数将不再起作用
+//	pb->setMinimumWidth(11); pb->setMaximumWidth(188); //为 pb 设置最大/最小大小
+//	pb1->setMinimumWidth(1); //为 pb1 设置最小大小
+//	pg->addWidget(pb); pg->addWidget(pb1); pg->addWidget(pb2); w.setLayout(pg);
+//	w.resize(300, 200); w.show(); return a.exec();
+//}
+
+// QDataStream
+
+//#include<QtWidgets>
+//class B
+//{
+//public:
+//	int a; 
+//}; //自定义类
+//int main(int argc, char* argv[])
+//{
+//	QApplication aa(argc, argv);
+//	QWidget w; QPushButton* pb = new QPushButton("AAA", &w);
+//	QFile f("E://1.txt"); f.open(QIODevice::WriteOnly); //①、以只写方式打开文本 1.txt
+//	QIcon i("E://Tom.png"); QPoint p(22, 22); //准备读/写的两个对象 i 和 p
+//	B mb; mb.a = 1; //自定义类型的对象
+//	QDataStream out(&f); //②、创建 QDataStream 对象并与 QFile 对象关联
+//	out << i << QString("BBB") << p; //③、把对象 i，字符串 BBB 和对象 p 存入文件 1.txt 中，
+//	//读者可在 F 盘下找到 1.txt 文件以查看文件中的内容。
+//	//out<<mb; //错误，读/写自定义类型需重载>>和<<运算符(其方法详见后文)
+//	f.close(); //关闭文件
+//	f.open(QIODevice::ReadOnly); //④、以只读方式重读打开文本 1.txt，以读取其内容
+//	QIcon i1; QString s; QPoint p1; //这些对象用于存储从文件读入的对象。
+//	QDataStream in(&f); //⑤、创建 QDataStream 对象并与 QFile 对象关联
+//	in >> i1 >> s >> p1; //⑥、把文件 1.txt 的内容读出并存储到 i1、s 和 p1 中，
+//	//注意，读取数据类型的顺序应与写入时的一致 
+//	//使用从文件读取到的数据设置按钮的图标，文本和位置
+//	pb->setIcon(i1); pb->setText(s); pb->move(p1);
+//	f.close(); w.resize(400, 333); w.show(); return aa.exec();
+//}
+
+// QScrollArea
+//#include<QtWidgets>
+//int main(int argc, char* argv[]) {
+//	QApplication app(argc, argv);
+//	QWidget* pw = new QWidget; //创建一个容器
+//	QLabel* pb = new QLabel;
+//	pb->setPixmap(QPixmap("E://Tom.png")); //把图片加载到标签中
+//	QPushButton* pb1 = new QPushButton("AAA");
+//	QPushButton* pb2 = new QPushButton("BBB");
+//	pb1->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed); //设置大小策略。
+//	//布局容器 pw 的部件
+//	QVBoxLayout* pv = new QVBoxLayout; //主布局
+//	QHBoxLayout* ph = new QHBoxLayout;
+//	ph->addWidget(pb1); ph->addWidget(pb2);
+//	pv->addWidget(pb); pv->addLayout(ph);
+//	pw->setLayout(pv); //此语句应位于 ps.setWidget(pw);之前。
+//	//pw->show();
+//	//设置容器 pw 的背景色为红色
+//	QPalette p1; p1.setColor(QPalette::Window, QColor(111, 1, 1));
+//	pw->setPalette(p1);
+//	QScrollArea ps; /*创建一个滚动区域，记住，QScrollArea 的祖先是 QWidget，因此，还
+//	可以像使用 QWidget 一样来使用 QScrollArea。*/
+//	ps.setWidget(pw);
+//	//设置滚动区域 ps 的背景色为蓝色
+//	QPalette p2; p2.setColor(QPalette::Window, QColor(1, 111, 1));
+//	ps.setPalette(p2);
+//	//在调用 show()显示 QScrollArea 之前需为子部件设置大小，否则子部件会不可见。
+//	pw->resize(333, 222);
+//	/*若 widgetResizable 属性为 true，还必须设置最小大小，此时，即使使用 resize()设置了子部件大
+//	小，子部件也会不可见。*/
+//	pw->setMinimumSize(333, 222);
+//	ps.show(); //显示 QScrollArea，也可把 ps 作为子部件添加到其他部件中。
+//	//#########################
+//	//以下部分内容用于验证视口部件，不是必须代码
+//	QWidget* pw1 = ps.viewport(); //获取 ps 的视口
+//	//以下语句视情况修改为 0 或 1，用于填充背景，若为 0 背景将透明。
+//	pw1->setAutoFillBackground(0);
+//	QPalette p3; p3.setColor(QPalette::Window, QColor(1, 1, 111));
+//	pw1->setPalette(p3); //设置视口的背景色。
+//	return app.exec();
+//}
+
+////QTime
+//#include<QtWidgets>
+//#include <QDebug>
+//int main(int argc, char* argv[])
+//{
+//	QApplication a(argc, argv);
+//	QTime  date = QTime::currentTime();
+//	qDebug() << date.toString();
+//
+//	return a.exec();
+//}
+
+//#include "QtLearning.h"
+//int main(int argc, char* argv[]) {
+//	QApplication app(argc, argv);
+//	B w; w.resize(444, 333); w.show(); return app.exec();
+//}
+//#include "QtLearning.h"
+//int main(int argc, char* argv[]) {
+//	QApplication app(argc, argv);
+//	B w; w.resize(444, 333); w.show(); return app.exec();
+//}
+
+// 验证器
+//#include<QtWidgets>
+//#include <iostream>
+//using namespace std;
+//int main(int argc, char* argv[]) {
+//	QApplication a(argc, argv);
+//	QWidget w;
+//	QLineEdit* pe1 = new QLineEdit(&w); pe1->move(22, 22); pe1->resize(77, 22);
+//	QIntValidator* vi = new QIntValidator(10, 900, &w); //使整数范围位于 10~900 之间。
+//	pe1->setValidator(vi); /*安装验证器 vi 后，pe1 将只能输出比 900 更小的整数，且不能输入字母
+//   等非数字。*/
+//	QString s = "1111"; int i = 0;
+//	cout << vi->validate(s, i) << endl; //输出 0，s 表示的字符串是无效整数。
+//	QLineEdit* pe2 = new QLineEdit(&w); pe2->move(111, 22); pe2->resize(77, 22);
+//	QDoubleValidator* vd = new QDoubleValidator(1, 11, 3, &w);
+//	vd->setNotation(QDoubleValidator::StandardNotation); /*使用标准方式表示浮点数，否则即使输
+//   入很大的浮点数也不会超出范围(因为可更改指数使其变为有效)*/
+//	pe2->setValidator(vd); //安装验证器
+//	w.resize(300, 200); w.show(); return a.exec();
+//}
+#include "A.h"
+
+int main()
+{
+    CircularQueue* pQueue = new CircularQueue();
+    std::string enter;
+
+    while (true)
+    {
+        std::cout << "请输入 1 表示 入队，2表示出队, -1 退出" << std::endl;
+        std::cin >> enter;
+
+        if (enter == "1")
+        {
+            std::cout << "请输入入队内容：" << std::endl;
+            int data;
+            std::cin >> data;
+            pQueue->enQueue(data);
+        }
+        else if (enter == "2")
+        {
+            pQueue->deQueue();
+        }
+        else if (enter == "-1")
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "无效输入，请重新输入！" << std::endl;
+        }
+        int a = 1;//用来断点
+    }
+
+    delete pQueue;  // 释放动态分配的内存
+    return 0;
 }
