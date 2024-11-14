@@ -441,40 +441,56 @@
 //	pe2->setValidator(vd); //安装验证器
 //	w.resize(300, 200); w.show(); return a.exec();
 //}
-#include "A.h"
-
-int main()
+//#include "A.h"
+//
+//int main()
+//{
+//    CircularQueue* pQueue = new CircularQueue();
+//    std::string enter;
+//
+//    while (true)
+//    {
+//        std::cout << "请输入 1 表示 入队，2表示出队, -1 退出" << std::endl;
+//        std::cin >> enter;
+//
+//        if (enter == "1")
+//        {
+//            std::cout << "请输入入队内容：" << std::endl;
+//            int data;
+//            std::cin >> data;
+//            pQueue->enQueue(data);
+//        }
+//        else if (enter == "2")
+//        {
+//            pQueue->deQueue();
+//        }
+//        else if (enter == "-1")
+//        {
+//            break;
+//        }
+//        else
+//        {
+//            std::cout << "无效输入，请重新输入！" << std::endl;
+//        }
+//        int a = 1;//用来断点
+//    }
+//
+//    delete pQueue;  // 释放动态分配的内存
+//    return 0;
+//}
+#include <opencv2/opencv.hpp>
+#include <QtWidgets>
+int main(int argc, char* argv[])
 {
-    CircularQueue* pQueue = new CircularQueue();
-    std::string enter;
-
-    while (true)
-    {
-        std::cout << "请输入 1 表示 入队，2表示出队, -1 退出" << std::endl;
-        std::cin >> enter;
-
-        if (enter == "1")
-        {
-            std::cout << "请输入入队内容：" << std::endl;
-            int data;
-            std::cin >> data;
-            pQueue->enQueue(data);
-        }
-        else if (enter == "2")
-        {
-            pQueue->deQueue();
-        }
-        else if (enter == "-1")
-        {
-            break;
-        }
-        else
-        {
-            std::cout << "无效输入，请重新输入！" << std::endl;
-        }
-        int a = 1;//用来断点
-    }
-
-    delete pQueue;  // 释放动态分配的内存
-    return 0;
+	QApplication a(argc, argv);
+	QWidget w;
+	cv::Mat pic = cv::imread("D://learning//test//QtLearning//pic//tom.png");
+	QImage image(pic.data, pic.cols, pic.rows, pic.step,QImage::Format_RGB888);
+	QLabel* plabel = new QLabel(&w);
+	plabel->setPixmap(QPixmap::fromImage(image));
+	cv::imshow("666", pic);
+	cv::waitKey(0);
+	plabel->show();
+	w.show();
+	return a.exec();
 }
